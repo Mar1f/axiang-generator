@@ -1,6 +1,5 @@
 package com.axiang.generator;
 
-
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
 
@@ -10,30 +9,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-/*
-*静态文件生成器
-* */
+/**
+ * 静态文件生成
+ */
 public class StaticGenerator {
 
-
     /**
-     * 拷贝文件的实现，会将输入目录完整拷贝到输出目录下
-     * @param inputPath 输入路径
-     * @param outputPath 输出路径
+     * 拷贝文件（Hutool 实现，会将输入目录完整拷贝到输出目录下）
+     *
+     * @param inputPath
+     * @param outputPath
      */
-    public static void copyFileByHutool(String inputPath, String outputPath){
-        FileUtil.copy(inputPath,outputPath,false);
+    public static void copyFilesByHutool(String inputPath, String outputPath) {
+        FileUtil.copy(inputPath, outputPath, false);
     }
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
+        // 获取整个项目的根路径
         String projectPath = System.getProperty("user.dir");
-        System.out.println(projectPath);
-        // 输入路径
-        String inputPath = projectPath + File.separator + "axiang-generator-demo-projects"+ File.separator+"acm-template";
-        // 输出路径
+        File parentFile = new File(projectPath).getParentFile();
+        // 输入路径：ACM 示例代码模板目录
+        String inputPath = new File(parentFile, "yuzi-generator-demo-projects/acm-template").getAbsolutePath();
+        // 输出路径：直接输出到项目的根目录
         String outputPath = projectPath;
-        // 保存文件
-        copyFileByRecursive(new File(inputPath), new File(outputPath));
+        copyFilesByHutool(inputPath, outputPath);
     }
+
     /**
      * 递归拷贝文件（递归实现，会将输入目录完整拷贝到输出目录下）
      * @param inputPath
@@ -60,7 +61,7 @@ public class StaticGenerator {
      * @param outputFile
      * @throws IOException
      */
-    static void copyFileByRecursive(File inputFile, File outputFile) throws IOException {
+    private static void copyFileByRecursive(File inputFile, File outputFile) throws IOException {
         // 区分是文件还是目录
         if (inputFile.isDirectory()) {
             System.out.println(inputFile.getName());
