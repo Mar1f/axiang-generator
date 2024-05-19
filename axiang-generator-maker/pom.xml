@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.axiang</groupId>
-    <artifactId>axiang-generator-basic</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>axiang-generator-maker</artifactId>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -66,7 +66,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.axiang.Main</mainClass> <!-- 替换为你的主类的完整类名 -->
+                            <mainClass>com.axiang.maker.Main</mainClass> <!-- 替换为你的主类的完整类名 -->
                         </manifest>
                     </archive>
                 </configuration>

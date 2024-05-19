@@ -1,0 +1,58 @@
+{
+  "name": "acm-template-pro-generator",
+  "description": "ACM 示例模板生成器",
+  "basePackage": "com.axiang",
+  "version": "1.0",
+  "author": "mar1",
+  "createTime": "2024-5-17",
+  "fileConfig": {
+    "inputRootPath": "F:/java/code/axiang-generator/axiang-generator-demo-projects/acm-template-pro",
+    "outputRootPath": "F:/java/code/axiang-generator",
+    "type": "dir",
+    "files": [
+      {
+        "inputPath": "src/com/axiang/acm/MainTemplate.java.ftl",
+        "outputPath": "src/com/axiang/acm/MainTemplate.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": ".gitignore",
+        "outputPath": ".gitignore",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "README.md",
+        "outputPath": "README.md",
+        "type": "file",
+        "generateType": "static"
+      }
+    ]
+  },
+  "modelConfig": {
+    "models": [
+      {
+        "fieldName": "loop",
+        "type": "boolean",
+        "description": "是否生成循环",
+        "defaultValue": false,
+        "abbr": "l"
+      },
+      {
+        "fieldName": "author",
+        "type": "String",
+        "description": "作者注释",
+        "defaultValue": "mar1",
+        "abbr": "a"
+      },
+      {
+        "fieldName": "outputText",
+        "type": "String",
+        "description": "输出信息",
+        "defaultValue": "sum = ",
+        "abbr": "o"
+      }
+    ]
+  }
+}

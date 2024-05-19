@@ -7,8 +7,9 @@ import picocli.CommandLine.Command;
  * @author:mar1
  * @data:2024/05/17
  **/
-@Command(name = "main",mixinStandardHelpOptions =true)
+@Command(name = "main", mixinStandardHelpOptions = true)
 public class SubCommandExample implements Runnable {
+
     @Override
     public void run() {
         System.out.println("执行主命令");
@@ -28,24 +29,24 @@ public class SubCommandExample implements Runnable {
         }
     }
 
-    @Command(name = "query", description = "査询", mixinStandardHelpOptions = true)
+    @Command(name = "query", description = "查询", mixinStandardHelpOptions = true)
     static class QueryCommand implements Runnable {
         public void run() {
-            System.out.println("执行査询命令");
+            System.out.println("执行查询命令");
         }
     }
 
     public static void main(String[] args) {
-        //主命令
+        // 执行主命令
         String[] myArgs = new String[] { };
-        //查看主命令的帮助手册
-//        String[] myArgs = new String[] {"--help"};
+        // 查看主命令的帮助手册
+//        String[] myArgs = new String[] { "--help" };
         // 执行增加命令
-//        String[] myArgs = new String[] {"add"};
+//        String[] myArgs = new String[] { "add" };
         // 执行增加命令的帮助手册
-//        String[] myArgs = new String[]{"add","--help"};
-        //执行不存在的命令
-//        String[] myArgs = new String[]{"update"};
+//        String[] myArgs = new String[] { "add", "--help" };
+        // 执行不存在的命令，会报错
+//        String[] myArgs = new String[] { "update" };
         int exitCode = new CommandLine(new SubCommandExample())
                 .addSubcommand(new AddCommand())
                 .addSubcommand(new DeleteCommand())
