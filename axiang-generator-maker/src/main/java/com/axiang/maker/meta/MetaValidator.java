@@ -11,6 +11,7 @@ import com.axiang.maker.meta.enums.ModelTypeEnum;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description；
@@ -37,6 +38,17 @@ public class MetaValidator {
             return;
         }
         for(Meta.ModelConfig.ModelInfo modelInfo : modelInfoList){
+            //为group，不校验
+            String groupKey = modelInfo.getGroupKey();
+            if(StrUtil.isNotEmpty(groupKey)){
+                // 生成中间参数"--author","--outputText"
+                List<Meta.ModelConfig.ModelInfo>subModelInfoList = modelInfo.getModels();
+                String allArgsStr = subModelInfoList.stream()
+                        .map(subModelInfo -> String.format("\"--%s\"", subModelInfo.getFieldName()))
+                        .collect(Collectors.joining(", "));
+                modelInfo.setAllArgsStr(allArgsStr);
+                continue;
+            }
             String fieldName = modelInfo.getFieldName();
             if(StrUtil.isBlank(fieldName)){
                 throw new MetaException("未填写 fieldName");

@@ -1,10 +1,6 @@
 package ${basePackage}.cli.command;
 
-/**
- * @description；
- * @author:mar1
- * @data:2024/05/17
- **/
+
 
 import cn.hutool.core.util.ReflectUtil;
 import ${basePackage}.model.DataModel;

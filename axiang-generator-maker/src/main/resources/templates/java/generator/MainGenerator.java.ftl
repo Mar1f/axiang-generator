@@ -1,79 +1,72 @@
 package ${basePackage}.generator;
-import ${basePackage}.model.DataModel;
+
+import  ${basePackage}.model.DataModel;
 import freemarker.template.TemplateException;
 
 import java.io.File;
 import java.io.IOException;
 
+<#macro generateFile indent fileInfo>
+${indent}inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
+${indent}outputPath = new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
+<#if fileInfo.generateType == "static">
+${indent}StaticGenerator.copyFilesByHutool(inputPath, outputPath);
+<#else>
+${indent}DynamicGenerator.doGenerate(inputPath, outputPath, model);
+</#if>
+</#macro>
+
 /**
- * @description；
- * @author:mar1
- * @data:2024/05/16
- **/
+* 核心生成器
+*/
 public class MainGenerator {
-    /**
-     * 生成
-     *
-     * @param model 数据模型
-     * @throws TemplateException
-     * @throws IOException
-     */
+    /*
+    * 生成
+    * @param model 数据类型
+    * @throws TemplateException
+    * @throws IOException
+    */
     public static void doGenerate(DataModel model) throws TemplateException, IOException {
         String inputRootPath = "${fileConfig.inputRootPath}";
-        String outputRootPath ="${fileConfig.outputRootPath}";
+        String outputRootPath = "${fileConfig.outputRootPath}";
 
         String inputPath;
         String outputPath;
-    <#list modelConfig.models as modelInfo>
-        ${modelInfo.type} ${modelInfo.fieldName} = model.${modelInfo.fieldName};
-    </#list>
 
-    <#list fileConfig.files as fileInfo>
-        <#if fileInfo.groupKey??>
-        // group = ${fileInfo.groupKey}
-        <#if fileInfo.condition??>
-        if(${fileInfo.condition}){
-            <#list fileInfo.files as fileInfo>
-                inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-                outputPath =  new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-                <#if fileInfo.generateType == "static">
-                    StaticGenerator.copyFilesByHutool(inputPath, outputPath);
-                <#else>
-                    DynamicGenerator.doGenerate(inputPath,outputPath,model);
-                </#if>
-            </#list>
-         }
+<#-- 获取模型变量 -->
+    <#list modelConfig.models as modelInfo>
+    <#-- 有分组 -->
+        <#if modelInfo.groupKey??>
+        <#list modelInfo.models as subModelInfo>
+        ${subModelInfo.type} ${subModelInfo.fieldName} = model.${modelInfo.groupKey}.${subModelInfo.fieldName};
+        </#list>
         <#else>
+        ${modelInfo.type} ${modelInfo.fieldName} = model.${modelInfo.fieldName};
+        </#if>
+    </#list>
+<#-- 有分组 -->
+<#list fileConfig.files as fileInfo>
+    <#if fileInfo.groupKey??>
+        // groupKey = ${fileInfo.groupKey}
+        <#if fileInfo.condition??>
+        if (${fileInfo.condition}) {
             <#list fileInfo.files as fileInfo>
-                inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-                outputPath =  new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-                <#if fileInfo.generateType == "static">
-                    StaticGenerator.copyFilesByHutool(inputPath, outputPath);
-                <#else>
-                    DynamicGenerator.doGenerate(inputPath,outputPath,model);
-                </#if>
+                <@generateFile fileInfo=fileInfo indent="            " />
             </#list>
+        }
+        <#else>
+        <#list fileInfo.files as fileInfo>
+        <@generateFile fileInfo=fileInfo indent="        " />
+        </#list>
         </#if>
         <#else>
-        </#if>
         <#if fileInfo.condition??>
-            if(${fileInfo.condition}){
-            inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-            outputPath =  new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-            <#if fileInfo.generateType == "static">
-               StaticGenerator.copyFilesByHutool(inputPath, outputPath);
-            <#else>
-              DynamicGenerator.doGenerate(inputPath,outputPath,model);
-            </#if>
-            }
+        if(${fileInfo.condition}) {
+            <@generateFile fileInfo=fileInfo indent="            " />
+        }
         <#else>
-            inputPath = new File(inputRootPath, "${fileInfo.inputPath}").getAbsolutePath();
-            outputPath =  new File(outputRootPath, "${fileInfo.outputPath}").getAbsolutePath();
-            <#if fileInfo.generateType == "static">
-                StaticGenerator.copyFilesByHutool(inputPath, outputPath);
-            <#else>
-                DynamicGenerator.doGenerate(inputPath,outputPath,model);
-            </#if>
+       <@generateFile fileInfo=fileInfo indent="        " />
+        </#if>
         </#if>
     </#list>
     }
