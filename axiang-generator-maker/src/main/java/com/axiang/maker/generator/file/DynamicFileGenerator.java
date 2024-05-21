@@ -19,7 +19,6 @@ public class DynamicFileGenerator {
     /**
      * 使用相对路径生成文件
      *
-     * @param relativeInputPath 模板文件相对输入路径
      * @param outputPath 输出路径
      * @param model 数据模型
      * @throws IOException

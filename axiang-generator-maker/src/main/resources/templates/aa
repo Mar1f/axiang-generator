@@ -1,0 +1,9 @@
+        boolean needGit = model.needGit;
+        boolean loop = model.loop;
+        String author = model.author;
+        String outputText = model.outputText;
+        if(needGit){
+            inputPath = new File(inputRootPath, ".gitignore").getAbsolutePath();
+            outputPath =  new File(outputRootPath, ".gitignore").getAbsolutePath();
+            StaticGenerator.copyFilesByHutool(inputPath, outputPath);
+        }
