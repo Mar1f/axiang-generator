@@ -12,10 +12,7 @@ import com.axiang.maker.meta.enums.FileGenerateTypeEnum;
 import com.axiang.maker.meta.enums.FileTypeEnum;
 import com.axiang.maker.template.enums.FileFilterRangeEnum;
 import com.axiang.maker.template.enums.FileFilterRuleEnum;
-import com.axiang.maker.template.model.FileFilterConfig;
-import com.axiang.maker.template.model.TemplateMakerConfig;
-import com.axiang.maker.template.model.TemplateMakerFileConfig;
-import com.axiang.maker.template.model.TemplateMakerModelConfig;
+import com.axiang.maker.template.model.*;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -34,19 +31,21 @@ public class TemplateMaker {
         TemplateMakerFileConfig templateMakerFileConfig = templateMakerConfig.getFileConfig();
         TemplateMakerModelConfig templateMakerModelConfig = templateMakerConfig.getModelConfig();
         Long id = templateMakerConfig.getId();
-
-        return makeTemplate(meta, originProjectPath, templateMakerFileConfig, templateMakerModelConfig,id);
+        TemplateMakerOutputConfig outputConfig = templateMakerConfig.getOutputConfig();
+        return makeTemplate(meta, originProjectPath, templateMakerFileConfig, templateMakerModelConfig,outputConfig,id);
     }
-        /**
-         * 制作模板
-         * @param newMeta
-         * @param originProjectPath
-         * @param templateMakerFileConfig
-         * @param templateMakerModelConfig
-         * @param id
-         * @return
-         */
-    public static long makeTemplate(Meta newMeta, String originProjectPath, TemplateMakerFileConfig templateMakerFileConfig, TemplateMakerModelConfig templateMakerModelConfig, Long id) {
+
+    /**
+     *
+     * @param newMeta
+     * @param originProjectPath
+     * @param templateMakerFileConfig
+     * @param templateMakerModelConfig
+     * @param templateMakerOutputConfig
+     * @param id
+     * @return
+     */
+    public static long makeTemplate(Meta newMeta, String originProjectPath, TemplateMakerFileConfig templateMakerFileConfig, TemplateMakerModelConfig templateMakerModelConfig, TemplateMakerOutputConfig templateMakerOutputConfig,  Long id) {
         // 没有 id 则生成
         if (id == null) {
             id = IdUtil.getSnowflakeNextId();
@@ -114,6 +113,14 @@ public class TemplateMaker {
             modelConfig.setModels(modelInfoList);
             modelInfoList.addAll(newModelInfoList);
         }
+        //额外的输出配置
+        if(templateMakerOutputConfig != null){
+            if(templateMakerOutputConfig.isRemoveGroupFilesFromRoot()){
+                List<Meta.FileConfig.FileInfo> fileInfoList = newMeta.getFileConfig().getFiles();
+                newMeta.getFileConfig().setFiles(TemplateMakerUtils.removeGroupFilesFromRoot(fileInfoList));
+            }
+        }
+
         // 2. 输出元信息文件
         FileUtil.writeUtf8String(JSONUtil.toJsonPrettyStr(newMeta), metaOutputPath);
         return id;
