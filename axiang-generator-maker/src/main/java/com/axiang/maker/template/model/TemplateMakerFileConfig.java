@@ -20,7 +20,11 @@ public class TemplateMakerFileConfig {
     @NoArgsConstructor
     @Data
     public static class FileInfoConfig{
+
         private String path;
+
+        private String condition;
+
         private List<FileFilterConfig>FilterConfigList;
     }
 
