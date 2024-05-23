@@ -10,10 +10,7 @@ import java.util.List;
  * @author:mar1
  * @data:2024/05/17
  **/
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @NoArgsConstructor
 @Data

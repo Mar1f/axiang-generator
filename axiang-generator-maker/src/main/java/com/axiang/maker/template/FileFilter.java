@@ -9,7 +9,6 @@ import com.axiang.maker.template.model.FileFilterConfig;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
-
 /**
  * 文件过滤器
  */

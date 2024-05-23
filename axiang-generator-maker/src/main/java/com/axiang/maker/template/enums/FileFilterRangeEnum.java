@@ -8,6 +8,9 @@ import lombok.Getter;
  * @data:2024/05/22
  **/
 
+/**
+ * 文件过滤范围枚举
+ */
 @Getter
 public enum FileFilterRangeEnum {
 

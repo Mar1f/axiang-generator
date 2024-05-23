@@ -1,11 +1,5 @@
 package ${basePackage}.cli.command;
 
-/**
- * @description；
- * @author:mar1
- * @data:2024/05/17
- **/
-
 import cn.hutool.core.io.FileUtil;
 import picocli.CommandLine.Command;
 
@@ -16,11 +10,11 @@ import java.util.List;
 public class ListCommand implements Runnable {
 
     public void run() {
+        // 输入路径
         String inputPath = "${fileConfig.inputRootPath}";
         List<File> files = FileUtil.loopFiles(inputPath);
-        for (File file : files) {
+            for (File file : files) {
             System.out.println(file);
         }
     }
-
 }

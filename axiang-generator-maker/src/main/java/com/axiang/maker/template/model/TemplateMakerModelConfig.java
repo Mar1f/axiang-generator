@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.SplittableRandom;
 
 /**
  * @description；
@@ -43,5 +44,7 @@ public class TemplateMakerModelConfig {
         private String groupKey;
 
         private String groupName;
+
+        private String description;
     }
 }

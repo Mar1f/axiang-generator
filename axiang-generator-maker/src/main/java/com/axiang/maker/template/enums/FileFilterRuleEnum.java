@@ -9,6 +9,9 @@ import lombok.Getter;
  * @data:2024/05/22
  **/
 
+/**
+ * 文件过滤规则枚举
+ */
 @Getter
 public enum FileFilterRuleEnum {
 

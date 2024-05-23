@@ -1,7 +1,6 @@
 package ${basePackage}.generator;
 
 import cn.hutool.core.io.FileUtil;
-import ${basePackage}.model.DataModel;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -12,19 +11,19 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * 动态文件生成
- */
+* 动态文件生成
+*/
 public class DynamicGenerator {
 
     /**
-     * 生成文件
-     *
-     * @param inputPath 模板文件输入路径
-     * @param outputPath 输出路径
-     * @param model 数据模型
-     * @throws IOException
-     * @throws TemplateException
-     */
+    * 生成文件
+    *
+    * @param inputPath 模板文件输入路径
+    * @param outputPath 输出路径
+    * @param model 数据模型
+    * @throws IOException
+    * @throws TemplateException
+    */
     public static void doGenerate(String inputPath, String outputPath, Object model) throws IOException, TemplateException {
         // new 出 Configuration 对象，参数为 FreeMarker 版本号
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_32);
@@ -45,12 +44,12 @@ public class DynamicGenerator {
             FileUtil.touch(outputPath);
         }
 
-        // 生成
-        Writer out = new FileWriter(outputPath);
-        template.process(model, out);
+            // 生成
+            Writer out = new FileWriter(outputPath);
+            template.process(model, out);
 
-        // 生成文件后别忘了关闭哦
-        out.close();
-    }
+            // 生成文件后别忘了关闭哦
+            out.close();
+        }
 
 }

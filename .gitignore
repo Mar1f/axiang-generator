@@ -2,6 +2,7 @@
 
 .idea
 generated
+.temp
 axiang-generator.iml
 axiang-generator-basic.iml
 
