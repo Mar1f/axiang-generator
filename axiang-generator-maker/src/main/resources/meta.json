@@ -4,19 +4,13 @@
   "basePackage": "com.axiang",
   "version": "1.0",
   "author": "mar1",
-  "createTime": "2024-5-17",
+  "createTime": "2024-5-11",
   "fileConfig": {
     "inputRootPath": ".source/acm-template-pro",
     "outputRootPath": "generated",
-    "sourceRootPath":"F:/java/code/axiang-generator/axiang-generator-demo-projects/acm-template-pro",
+    "sourceRootPath": "F:/java/code/axiang-generator/acm-template-proaxiang-generator/axiang-generator-demo-projects/acm-template-pro",
     "type": "dir",
     "files": [
-      {
-        "inputPath": "src/com/axiang/acm/MainTemplate.java.ftl",
-        "outputPath": "src/com/axiang/acm/MainTemplate.java",
-        "type": "file",
-        "generateType": "dynamic"
-      },
       {
         "groupKey": "git",
         "groupName": "开源",
@@ -36,8 +30,13 @@
             "generateType": "static"
           }
         ]
+      },
+      {
+        "inputPath": "src/com/axiang/acm/MainTemplate.java.ftl",
+        "outputPath": "src/com/axiang/acm/MainTemplate.java",
+        "type": "file",
+        "generateType": "dynamic"
       }
-
     ]
   },
   "modelConfig": {
@@ -45,8 +44,8 @@
       {
         "fieldName": "needGit",
         "type": "boolean",
-        "description": "是否生成.gitignore 文件",
-        "defaultValue": false
+        "description": "是否生成 .gitignore 文件",
+        "defaultValue": true
       },
       {
         "fieldName": "loop",

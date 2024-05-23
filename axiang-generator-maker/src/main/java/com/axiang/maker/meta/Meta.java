@@ -10,9 +10,15 @@ import java.util.List;
  * @author:mar1
  * @data:2024/05/17
  **/
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
 @NoArgsConstructor
 @Data
 public class Meta {
+
     private String name;
     private String description;
     private String basePackage;
@@ -64,9 +70,8 @@ public class Meta {
             private String condition;
 
             // 中间参数
-            // 该分组下的所有参数拼接的字符串
+            // 该分组下所有参数拼接字符串
             private String allArgsStr;
-
         }
     }
 }

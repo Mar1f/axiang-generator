@@ -1,13 +1,14 @@
 package com.axiang.maker.template.enums;
 
 import cn.hutool.core.util.ObjectUtil;
-
+import lombok.Getter;
 /**
  * @description；文件过滤范围枚举
  * @author:mar1
  * @data:2024/05/22
  **/
 
+@Getter
 public enum FileFilterRangeEnum {
 
     FILE_NAME("文件名称", "fileName"),
@@ -22,20 +23,18 @@ public enum FileFilterRangeEnum {
         this.value = value;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public static FileFilterRangeEnum getEnumByValue(String value){
-        if(ObjectUtil.isEmpty(value)){
+    /**
+     * 根据 value 获取枚举
+     *
+     * @param value
+     * @return
+     */
+    public static FileFilterRangeEnum getEnumByValue(String value) {
+        if (ObjectUtil.isEmpty(value)) {
             return null;
         }
-        for(FileFilterRangeEnum anEnum : FileFilterRangeEnum.values()){
-            if(anEnum.value.equals(value)){
+        for (FileFilterRangeEnum anEnum : FileFilterRangeEnum.values()) {
+            if (anEnum.value.equals(value)) {
                 return anEnum;
             }
         }

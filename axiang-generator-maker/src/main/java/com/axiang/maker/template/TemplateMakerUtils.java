@@ -1,16 +1,17 @@
 package com.axiang.maker.template;
+
 import cn.hutool.core.util.StrUtil;
 import com.axiang.maker.meta.Meta;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /**
- * @description；模板制作工具类
- * @author:mar1
- * @data:2024/05/22
- **/
+ * 模板制作工具类
+ */
 public class TemplateMakerUtils {
+
     /**
      * 从未分组文件中移除组内的同名文件
      *
